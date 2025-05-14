@@ -1,11 +1,23 @@
-# Python requirements
-fastapi>=0.100.0
-uvicorn[standard]>=0.22.0
-loguru>=0.7.0
-pydantic>=1.10.0
-sentence-transformers>=2.2.0
-bertopic[visualization]>=0.16.0 
-transformers[torch]>=4.30.0 
-torch>=2.0.0 --index-url https://download.pytorch.org/whl/cpu
+# nlp_analyzer_service/requirements.txt
+
+fastapi>=0.100.0 # Or pin if you have issues: fastapi==0.104.1
+uvicorn[standard]>=0.22.0 # Or pin: uvicorn[standard]==0.23.2
+loguru>=0.7.0 # Or pin: loguru==0.7.2
+pydantic>=1.10.0 # Or pin: pydantic==2.5.2
+
+# Core dependencies - MATCH YOUR TRAINING ENVIRONMENT AS CLOSELY AS POSSIBLE
+sentence-transformers>=2.2.0 # Usually okay with a recent version unless BERTopic pins it
+bertopic==0.16.0          # <<<--- PINNED to training version
+scikit-learn==1.3.2       # <<<--- PINNED to training version
+pandas==2.0.3             # <<<--- PINNED to training version (optional, but good)
+numpy==1.26.0             # <<<--- PINNED to training version (optional, but good)
+umap-learn==0.5.4         # <<<--- PINNED to training version (optional, but good)
+hdbscan==0.8.33           # <<<--- PINNED to training version (optional, but good)
+# joblib==1.3.2 # If you were using it
+
+transformers[torch]>=4.30.0 # Usually okay with a recent version
+torch>=2.0.0 --index-url https://download.pytorch.org/whl/cpu # CPU PyTorch is fine
+
 yake>=0.4.8
 apscheduler>=3.10.0
+protobuf>=3.20.0 # For the sentiment model
