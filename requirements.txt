@@ -1,0 +1,11 @@
+# Python requirements
+fastapi>=0.100.0
+uvicorn[standard]>=0.22.0
+loguru>=0.7.0
+pydantic>=1.10.0
+sentence-transformers>=2.2.0
+bertopic[visualization]>=0.16.0 
+transformers[torch]>=4.30.0 
+torch>=2.0.0 --index-url https://download.pytorch.org/whl/cpu
+yake>=0.4.8
+apscheduler>=3.10.0
