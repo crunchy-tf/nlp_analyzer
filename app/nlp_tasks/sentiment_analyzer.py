@@ -1,4 +1,3 @@
-# Sentiment Analyzer Logic
 from transformers import pipeline, PreTrainedModel, PreTrainedTokenizerBase
 from loguru import logger
 from typing import List, Dict, Optional, Any
@@ -15,7 +14,14 @@ class SentimentAnalyzer:
     def _load_model(self):
         try:
             logger.info(f"Loading zero-shot sentiment model: {self.model_name}")
-            self.classifier = pipeline("zero-shot-classification", model=self.model_name)
+            # Explicitly tell transformers to not use the "fast" tokenizer
+            # if the conversion is causing issues.
+            self.classifier = pipeline(
+                "zero-shot-classification",
+                model=self.model_name,
+                tokenizer=self.model_name, # Explicitly load tokenizer by name
+                use_fast=False             # <<<--- ADDED THIS LINE
+            )
             logger.info("Zero-shot sentiment model loaded successfully.")
         except Exception as e:
             logger.error(f"Failed to load zero-shot sentiment model: {e}", exc_info=True)
@@ -47,6 +53,7 @@ class SentimentAnalyzer:
             logger.error(f"Error during sentiment analysis for text '{text[:100]}...': {e}", exc_info=True)
             return None
 
+# Global instance (loaded at startup)
 sentiment_pipeline = SentimentAnalyzer()
 
 def get_sentiment_analyzer_instance():
