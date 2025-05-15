@@ -1,27 +1,24 @@
-fastapi>=0.100.0
-uvicorn[standard]>=0.22.0
-loguru>=0.7.0
-pydantic>=1.10.0
+fastapi==0.104.1
+uvicorn[standard]==0.23.2
+loguru==0.7.2
+pydantic==2.5.2 # Often good to pin this with FastAPI
 
-# --- Core dependencies for BERTopic/Sentiment - PIN THESE TO YOUR TRAINING ENV VERSIONS ---
-# Replace X.Y.Z with the versions from your `pip freeze` on the training VM
-bertopic==0.16.0          # <<<--- EXAMPLE! FIND YOUR EXACT VERSION
-scikit-learn==1.3.2       # <<<--- EXAMPLE! FIND YOUR EXACT VERSION
-pandas==2.0.3             # <<<--- EXAMPLE! FIND YOUR EXACT VERSION
-numpy==1.26.0             # <<<--- EXAMPLE! FIND YOUR EXACT VERSION
-umap-learn==0.5.4         # <<<--- EXAMPLE! FIND YOUR EXACT VERSION
-hdbscan==0.8.33           # <<<--- EXAMPLE! FIND YOUR EXACT VERSION
-# sentence-transformers might be okay with >= but if BERTopic pinned it, match that too.
-sentence-transformers>=2.2.0 
-# joblib might be installed as a dependency of scikit-learn or hdbscan
-# joblib==A.B.C # If you find a specific version was used
+# --- Core dependencies - PINNED TO MATCH NEW PRETRAINING ENV ---
+sentence-transformers==2.7.0
+bertopic==0.16.0
+scikit-learn==1.3.2
+pandas==2.0.3
+numpy==1.26.0
+umap-learn==0.5.5
+hdbscan==0.8.33
+joblib==1.3.2
 
 # --- Dependencies for Transformers/Sentiment ---
-transformers[torch]>=4.30.0 # Or pin if needed: transformers[torch]==4.35.0
-torch>=2.0.0 --index-url https://download.pytorch.org/whl/cpu
-sentencepiece>=0.1.98     # <<<--- ADDED/UPDATED
-protobuf>=3.20.0          # <<<--- ADDED/UPDATED
+transformers[torch]==4.35.2 # Pinning transformers
+torch==2.1.2 --index-url https://download.pytorch.org/whl/cpu
+sentencepiece==0.1.99
+protobuf==4.25.1
 
 # --- Other dependencies ---
-yake>=0.4.8
-apscheduler>=3.10.0
+yake==0.4.8
+apscheduler==3.10.4 # Pinning this too
